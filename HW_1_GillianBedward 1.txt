@@ -1,0 +1,108 @@
+Weather Data Assignment – Lesson 1
+
+---
+
+Question 1
+Determine which one of the files is the CSV format file.
+
+The CSV file is the file that, when opened in a plain text editor, shows comma‑separated values with a clear header row. A valid CSV file contains rows like:
+
+time,temp,dew,hum,speed,gust,dir,rain,baro
+00:00,14.1,11.1,82,0,0,0,0,1021
+
+The file that displays this consistent comma‑separated structure is the CSV format file.
+
+---
+
+Question 2
+R expression using read.csv() with a full path.
+
+weather <- read.csv("C:/Users/YourName/Downloads/data20130101.csv")
+head(weather)
+
+---
+
+Question 3
+R expressions using setwd() and read.csv().
+
+setwd("C:/Users/YourName/Downloads")
+weather <- read.csv("data20130101.csv")
+head(weather)
+
+---
+
+Question 4
+Open "data20130101.csv" using row.names = 1.
+
+This treats the time column as row names.
+
+day1 <- read.csv("data20130101.csv", row.names = 1)
+head(day1)
+
+---
+
+Question 5
+Calculate the minimum and maximum values in the first CSV file.
+
+minValue <- min(day1)
+maxValue <- max(day1)
+
+minValue
+maxValue
+
+---
+
+Question 6
+Convert the maximum value from hectopascals to psi.
+
+maxPSI <- maxValue * 0.0145037738
+maxPSI
+
+---
+
+Question 7
+Calculate the maximum value across all 9 CSV files.
+
+files <- sprintf("data201301%02d.csv", 1:9)
+
+overallMax <- -Inf
+
+for (f in files) {
+d <- read.csv(f, row.names = 1)
+overallMax <- max(overallMax, max(d))
+}
+
+overallMax
+
+---
+
+Question 8
+Flow diagram and pseudocode.
+
+Flow Diagram (Text Description)
+
+START
+→ Set working directory
+→ Read first CSV file
+→ Compute minimum and maximum values
+→ Convert maximum value to PSI
+→ Initialize overallMax
+→ Loop through all 9 CSV files
+→ Update overallMax if a larger value is found
+→ Output results
+END
+
+Pseudocode
+
+Set working directory
+Read first CSV file with row names
+Compute minValue and maxValue
+Convert maxValue to PSI
+Set overallMax to a very small number
+For each CSV file:
+Read file
+Find maximum value in file
+Update overallMax if necessary
+Display minValue, maxValue, maxPSI, and overallMax
+
+---
